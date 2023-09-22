@@ -147,7 +147,7 @@ FROM
 
 
 -- 16 - Update project end date
-UPDATE 
+UPDATE  
 	projects
 SET 
 	end_date = start_date + INTERVAL '5 months'
@@ -173,7 +173,7 @@ WHERE
 
 
 -- 19 Create a view
-CREATE OR REPLACE VIEW 
+CREATE VIEW 
 	view_company_chart AS
 SELECT 
 	"Full Name",
@@ -185,18 +185,18 @@ WHERE
 
 
 -- 20 - Create a View with multiple tables
-CREATE OR REPLACE VIEW 
+CREATE VIEW 
 	view_addresses AS
 SELECT 
-	CONCAT(em.first_name, ' ', em.last_name) AS "Full Name",
-	em.department_id,
-	CONCAT(number, ' ', ad.street) AS "Address"
+	CONCAT(e.first_name, ' ', e.last_name) AS "Full Name",
+	e.department_id,
+	CONCAT(number, ' ', a.street) AS "Address"
 FROM
-	employees AS em
-INNER JOIN
-	addresses AS ad
+	employees AS e
+JOIN
+	addresses AS a
 ON 
-	em.address_id = ad.id
+	e.address_id = a.id
 ORDER BY 
 	"Address";
 
